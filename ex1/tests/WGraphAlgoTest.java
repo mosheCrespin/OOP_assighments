@@ -64,9 +64,10 @@ public class WGraphAlgoTest {
         g0.connect(0,1,3);
         g0.connect(0,2,3);
         g0.connect(1,3,2);
-        weighted_graph_algorithms ga=new WGraph_Algo(g0);
+        weighted_graph_algorithms ga=new WGraph_Algo();
+        ga.init(g0);
         assertEquals(-1,ga.shortestPathDist(0,4));
-        assertTrue(ga.shortestPath(0,4).isEmpty());
+        assertNull(ga.shortestPath(0,4));
     }
 
     @Test
@@ -152,7 +153,8 @@ public class WGraphAlgoTest {
     void checkConnectivityWith2And1NodesWith0Edges(){
         weighted_graph g0=new WGraph_DS();
         g0.addNode(0);
-        weighted_graph_algorithms ga=new WGraph_Algo(g0);
+        weighted_graph_algorithms ga=new WGraph_Algo();
+        ga.init(g0);
         assertTrue(ga.isConnected());
         g0.addNode(1);
         assertFalse(ga.isConnected());
@@ -168,7 +170,8 @@ public class WGraphAlgoTest {
         g0.connect(3,1,0);
         g0.connect(3,4,1);
         g0.connect(1,4,0);
-        weighted_graph_algorithms ga=new WGraph_Algo(g0);
+        weighted_graph_algorithms ga=new WGraph_Algo();
+        ga.init(g0);
         assertEquals(0,ga.shortestPathDist(0,3));
         int[] arr=new int[5];
         arr[1]=2;
@@ -187,7 +190,8 @@ public class WGraphAlgoTest {
     @Test
     void checkPathFromNodeToItself(){
         weighted_graph g0=connected_graph_creator(10);
-        weighted_graph_algorithms ga=new WGraph_Algo(g0);
+        weighted_graph_algorithms ga=new WGraph_Algo();
+        ga.init(g0);
         assertEquals(0,ga.shortestPathDist(2,2));
         List<node_info> ll=ga.shortestPath(2,2);
         assertEquals(1,ll.size());
@@ -196,7 +200,8 @@ public class WGraphAlgoTest {
     @Test
     void checkPathFromAndToNotExitingNode(){
         weighted_graph g0=connected_graph_creator(10);
-        weighted_graph_algorithms ga=new WGraph_Algo(g0);
+        weighted_graph_algorithms ga=new WGraph_Algo();
+        ga.init(g0);
         assertNull(ga.shortestPath(12,8));
         assertNull(ga.shortestPath(8,12));
         assertEquals(-1,ga.shortestPathDist(8,12));

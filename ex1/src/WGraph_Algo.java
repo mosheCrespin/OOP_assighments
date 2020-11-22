@@ -196,8 +196,8 @@ public class WGraph_Algo implements weighted_graph_algorithms,java.io.Serializab
             }
 
         }
-        if(!flag)//if there is no path then return an empty list
-            return new LinkedList<>();;
+        if(!flag)//if there is no path then return null
+            return null;
 
         return buildPath(father,end);//builds path using `buildPath` and return this list
     }
